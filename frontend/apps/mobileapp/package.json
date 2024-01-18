@@ -10,6 +10,8 @@
     "clean": "rm -rf .expo && rm -rf .turbo && rm -rf node_modules"
   },
   "dependencies": {
+    "@bundly/ic-core-js": "^0.1.2",
+    "@bundly/ic-react": "^0.1.0",
     "big-integer": "^1.6.52",
     "classnames": "^2.5.1",
     "expo": "~49.0.15",
@@ -19,8 +21,6 @@
     "expo-router": "^2.0.0",
     "expo-status-bar": "~1.6.0",
     "firebase": "^10.7.1",
-    "@bundly/ic-core-js": "^0.1.2",
-    "icp-connect-react": "*",
     "icp-connect-react-native": "*",
     "lucide-react-native": "^0.302.0",
     "nativewind": "^4.0.1",

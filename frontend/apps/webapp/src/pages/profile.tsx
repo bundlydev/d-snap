@@ -2,8 +2,6 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { useActor } from "icp-connect-react/hooks";
-
 import Layout from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,6 +12,7 @@ import { AuthButton } from "@/lib/auth/auth-button";
 import { AuthContext } from "@/lib/auth/auth-context";
 import { storage } from "@/lib/firebase";
 import { ActorMap } from "@bundly/ic-core-js/client";
+import { useActor } from "@bundly/ic-react/hooks";
 
 import { Canisters } from "../canisters";
 

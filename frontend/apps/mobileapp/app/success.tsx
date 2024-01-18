@@ -2,9 +2,8 @@ import { Link, router, useLocalSearchParams } from "expo-router";
 import React, { useEffect } from "react";
 import { Text, TextBase, View } from "react-native";
 
-import { useAuth } from "icp-connect-react/hooks";
-
 import { AppLinkParams } from "@bundly/ic-core-js";
+import { useAuth } from "@bundly/ic-react/hooks";
 
 const SuccessPage = () => {
   const { onAppLinkOpened } = useAuth();

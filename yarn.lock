@@ -1322,7 +1322,7 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bundly/ic-core-js@^0.1.2":
+"@bundly/ic-core-js@^0.1.0", "@bundly/ic-core-js@^0.1.2":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@bundly/ic-core-js/-/ic-core-js-0.1.2.tgz#a00d64cdeaa775d3f0ba79f9b6cead4bea5baf2f"
   integrity sha512-xwqvEzCSBlVB4CHqLq9QqwidS2r+xvtfkDSRQll1D8Cpk3DjnhMRcXR3LibBJbP/WMtviKPLnfYvLvPEXJWrtw==
@@ -1332,6 +1332,18 @@
     "@dfinity/candid" "^0.20.2"
     "@dfinity/identity" "^0.20.2"
     "@dfinity/principal" "^0.20.2"
+
+"@bundly/ic-react@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@bundly/ic-react/-/ic-react-0.1.0.tgz#5849ea2f399540a0c5faafae19e20f7bc5721481"
+  integrity sha512-G+hd3e7DcQ17euQ7AKRZk65vuvefrot+PZz0ZII1yPWP5iPBVqsngrMduALes2kU9K38l5ZEmeA/6WuOVQEUbA==
+  dependencies:
+    "@bundly/ic-core-js" "^0.1.0"
+    "@dfinity/agent" "^0.20.2"
+    "@dfinity/auth-client" "^0.20.2"
+    "@dfinity/identity" "^0.20.2"
+    "@dfinity/principal" "^0.20.2"
+    react "^18.2.0"
 
 "@csstools/normalize.css@*":
   version "12.1.1"

@@ -1,9 +1,8 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 import z from "zod";
 
-import { useActor, useAuth } from "icp-connect-react/hooks";
-
 import { ActorMap } from "@bundly/ic-core-js/client";
+import { useActor, useAuth } from "@bundly/ic-react/hooks";
 
 import { Canisters } from "../../canisters";
 

@@ -1,12 +1,11 @@
 import { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 
-import { IcpConnectContextProvider } from "icp-connect-react/context";
-
 import { AppLoader } from "@/components/app-loader";
 import { AuthContextProvider } from "@/lib/auth/auth-context";
 import { Client } from "@bundly/ic-core-js/client";
 import { InternetIdentity } from "@bundly/ic-core-js/identity-providers";
+import { IcpConnectContextProvider } from "@bundly/ic-react/context";
 
 import "../app/globals.css";
 import { Canisters } from "../canisters";

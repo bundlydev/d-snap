@@ -21,8 +21,8 @@ frontend
   - mobileapp
   - webapp
 - packages
-  - icp-connect-react
-  - icp-connect-react-react-native
+  - @bundly/ic-react
+  - @bundly/ic-react-react-native
 
 ## Installing OS Dependencies
 

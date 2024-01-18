@@ -3,8 +3,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { useActor } from "icp-connect-react/hooks";
-
 import Layout from "@/components/layout";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -16,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAuthGuard } from "@/hooks/useRouterGuard";
 import { storage } from "@/lib/firebase";
 import { ActorMap } from "@bundly/ic-core-js/client";
+import { useActor } from "@bundly/ic-react/hooks";
 
 import { Canisters } from "../canisters";
 

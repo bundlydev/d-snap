@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import z from "zod";
 
-import { useActor } from "icp-connect-react/hooks";
-
 import { ActorMap } from "@bundly/ic-core-js";
+import { useActor } from "@bundly/ic-react/hooks";
 
 import { Canisters } from "../../src/canisters";
 import { AuthContext } from "../../src/lib/auth/auth-context";

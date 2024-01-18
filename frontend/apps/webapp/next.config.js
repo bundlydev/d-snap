@@ -15,7 +15,7 @@ module.exports = {
 
     return config;
   },
-  transpilePackages: ["@bundly/ic-core-js", "icp-connect-react"],
+  transpilePackages: ["@bundly/ic-core-js", "@bundly/ic-react"],
   output: "export",
   distDir: "build",
 };

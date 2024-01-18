@@ -7,9 +7,8 @@ import { Image, Pressable, Text, TextInput, View } from "react-native";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
-import { useActor } from "icp-connect-react/hooks";
-
 import { ActorMap } from "@bundly/ic-core-js";
+import { useActor } from "@bundly/ic-react/hooks";
 
 import { Canisters } from "../../src/canisters";
 import { storage } from "../../src/lib/firebase";

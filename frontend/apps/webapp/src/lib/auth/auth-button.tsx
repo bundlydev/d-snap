@@ -1,5 +1,6 @@
+import { useAuth } from "@bundly/ic-react/hooks";
+
 import { Button } from "../../components/ui/button";
-import { useAuth } from "icp-connect-react/hooks";
 
 export function AuthButton() {
   const { isAuthenticated, connect, disconnect } = useAuth();
