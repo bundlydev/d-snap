@@ -1,5 +1,6 @@
-import { Button } from "../../components/ui/button";
 import { useAuth } from "icp-connect-react/hooks";
+
+import { Button } from "../../components/ui/button";
 
 export function AuthButton() {
   const { isAuthenticated, connect, disconnect } = useAuth();
@@ -29,7 +30,7 @@ type LogoutButtonProps = {
 function LogoutButton(props: LogoutButtonProps) {
   return (
     <Button
-      className="w-full py-2 bg-purple-600 text-white rounded-md"
+      className="w-full py-2 bg-black text-white rounded-md"
       variant="outline"
       onClick={() => props.logout()}>
       <div className="flex items-center justify-center gap-2">Logout</div>
