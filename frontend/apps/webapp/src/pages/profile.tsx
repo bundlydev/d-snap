@@ -24,11 +24,12 @@ const ProfilePage = () => {
   const [imgUrl, setImgUrl] = useState<string | null>(null);
   const [progressPercent, setProgressPercent] = useState(0);
   const [loading, setLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, watch } = useForm({
+    defaultValues: {
+      username: profile?.username,
+      bio: profile?.bio,
+    },
+  });
   const user = useActor<Canisters>("user") as ActorMap<Canisters>["user"];
 
   useEffect(() => {
@@ -69,6 +70,7 @@ const ProfilePage = () => {
             <CardDescription>Modify your account settings.</CardDescription>
           </CardHeader>
           <CardContent className="my-2">
+            {}
             <form onSubmit={handleSubmitProfilePicture} className="form">
               {!imgUrl && progressPercent > 0 && (
                 <div className="outerbar">
@@ -118,7 +120,7 @@ const ProfilePage = () => {
                 <Input
                   id="username"
                   placeholder={"Type your desired username"}
-                  value={profile?.username || ""}
+                  value={watch("username") || ""}
                   {...register("username", { required: true })}
                 />
               </div>
@@ -128,7 +130,7 @@ const ProfilePage = () => {
                   id="bio"
                   placeholder={"Write something about you"}
                   type="text"
-                  value={profile?.bio || ""}
+                  value={watch("bio") || ""}
                   {...register("bio", { required: true })}
                 />
               </div>
@@ -140,14 +142,13 @@ const ProfilePage = () => {
               onClick={handleSubmit(async (data) => {
                 setLoading(true);
                 try {
-                  const result = await user.create({
-                    bio: data.bio,
-                    username: data.username,
+                  await user.create({
+                    bio: data.bio || "",
+                    username: data.username || "",
                     picture: {
                       url: imgUrl || "",
                     },
                   });
-                  console.log({ result });
                 } catch (error) {
                   console.log(error);
                 }
