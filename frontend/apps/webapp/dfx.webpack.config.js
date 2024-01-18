@@ -18,8 +18,6 @@ function setCanisterVariables(canisterNames, relativeRootPath) {
     for (const name of canisterNames) {
       const variableName = `NEXT_PUBLIC_${name.toUpperCase()}_CANISTER_ID`;
 
-      console.log({variableName});
-
       process.env[variableName] = canisters[name][network];
 
       variables.push(variableName);
