@@ -21,7 +21,6 @@ frontend
   - mobileapp
   - webapp
 - packages
-  - @bundly/ic-react
   - @bundly/ic-react-react-native
 
 ## Installing OS Dependencies
