@@ -1,8 +1,11 @@
-import { Canisters } from "../../canisters";
-import { ActorMap } from "icp-connect-core/client";
-import { useActor, useAuth } from "icp-connect-react/hooks";
 import { ReactNode, createContext, useEffect, useState } from "react";
 import z from "zod";
+
+import { useActor, useAuth } from "icp-connect-react/hooks";
+
+import { ActorMap } from "@bundly/ic-core-js/client";
+
+import { Canisters } from "../../canisters";
 
 export type AuthUserProfile = {
   bio: string;

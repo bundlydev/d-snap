@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import z from "zod";
 
-import { ActorMap } from "icp-connect-core/client";
 import { useActor } from "icp-connect-react/hooks";
 
 import Layout from "@/components/layout";
@@ -12,6 +11,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAuthGuard } from "@/hooks/useRouterGuard";
 import { AuthContext } from "@/lib/auth/auth-context";
+import { ActorMap } from "@bundly/ic-core-js/client";
 
 import { Canisters } from "../canisters";
 

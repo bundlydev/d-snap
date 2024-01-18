@@ -2,7 +2,6 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { ActorMap } from "icp-connect-core/client";
 import { useActor } from "icp-connect-react/hooks";
 
 import Layout from "@/components/layout";
@@ -14,6 +13,7 @@ import { useAuthGuard } from "@/hooks/useRouterGuard";
 import { AuthButton } from "@/lib/auth/auth-button";
 import { AuthContext } from "@/lib/auth/auth-context";
 import { storage } from "@/lib/firebase";
+import { ActorMap } from "@bundly/ic-core-js/client";
 
 import { Canisters } from "../canisters";
 

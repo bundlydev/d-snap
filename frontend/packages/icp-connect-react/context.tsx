@@ -1,6 +1,7 @@
-import { AnonymousIdentity, Identity } from "@dfinity/agent";
-import { AppLinkParams, Client } from "icp-connect-core";
 import React, { ReactNode, createContext, useEffect, useState } from "react";
+
+import { AppLinkParams, Client } from "@bundly/ic-core-js";
+import { AnonymousIdentity, Identity } from "@dfinity/agent";
 
 export type IcpConnectContextType<T extends Record<string, any>> = {
   client: Client<T>;

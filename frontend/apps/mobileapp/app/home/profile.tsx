@@ -2,8 +2,9 @@ import classNames from "classnames";
 import React, { useContext, useState } from "react";
 import { Image, Pressable, Text, TextInput, View } from "react-native";
 
-import { ActorMap } from "icp-connect-core";
 import { useActor } from "icp-connect-react/hooks";
+
+import { ActorMap } from "@bundly/ic-core-js";
 
 import { Canisters } from "../../src/canisters";
 import { AuthContext } from "../../src/lib/auth/auth-context";

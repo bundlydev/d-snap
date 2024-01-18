@@ -2,7 +2,29 @@
 
 Welcome to your new dSnap project and to the internet computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
 
-## Install OS Dependencies
+It contains the development of a middleware tool that we use to authenticate users using Internet Identity on mobile devices.
+
+## Project structure
+
+backend
+
+- canisters
+  - user
+- packages
+  - Image.mo
+  - Utils.mo
+
+frontend
+
+- apps
+  - internet-identity-middleware
+  - mobileapp
+  - webapp
+- packages
+  - icp-connect-react
+  - icp-connect-react-react-native
+
+## Installing OS Dependencies
 
 ### UNIX/Linux
 

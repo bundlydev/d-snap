@@ -3,10 +3,10 @@ import { ExpoRoot } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Text } from "react-native";
 
-import { Client } from "icp-connect-core/client";
 import { InternetIdentityReactNative } from "icp-connect-react-native/identity-providers";
 import { IcpConnectContextProvider } from "icp-connect-react/context";
 
+import { Client } from "@bundly/ic-core-js/client";
 // @ts-ignore
 import { IC_HOST, INTERNET_IDENTITY_URL } from "@env";
 
