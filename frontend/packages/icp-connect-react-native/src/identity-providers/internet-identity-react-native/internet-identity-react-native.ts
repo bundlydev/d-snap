@@ -1,7 +1,7 @@
 import * as Device from "expo-device";
 import * as SecureStore from "expo-secure-store";
-import * as WebBrowser from "expo-web-browser";
 
+// import * as WebBrowser from "expo-web-browser";
 import { AppLinkParams, IdentityProvider } from "@bundly/ic-core-js";
 import { AnonymousIdentity, Identity, SignIdentity, toHex } from "@dfinity/agent";
 import {
@@ -104,7 +104,7 @@ export class InternetIdentityReactNative implements IdentityProvider {
     this._identity = identity;
 
     if (["iOS", "iPadOS"].includes(Device.osName || "")) {
-      WebBrowser.dismissBrowser();
+      // WebBrowser.dismissBrowser();
     }
   }
 
@@ -114,7 +114,7 @@ export class InternetIdentityReactNative implements IdentityProvider {
     try {
       // If `connect` has been called previously, then close/remove any previous windows
       if (["iOS", "iPadOS"].includes(Device.osName || "")) {
-        WebBrowser.dismissBrowser();
+        // WebBrowser.dismissBrowser();
       }
 
       const derKey = toHex(this._key.getPublicKey().toDer());
@@ -124,7 +124,7 @@ export class InternetIdentityReactNative implements IdentityProvider {
       url.searchParams.set("redirect_uri", encodeURIComponent(this.config.appLink));
 
       url.searchParams.set("pubkey", derKey);
-      await WebBrowser.openBrowserAsync(url.toString(), { showTitle: false });
+      // await WebBrowser.openBrowserAsync(url.toString(), { showTitle: false });
     } catch (error) {
       throw error;
     }

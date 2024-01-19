@@ -1,11 +1,17 @@
 {
   "name": "icp-connect-react-native",
-  "version": "0.1.0",
-  "main": "index.ts",
-  "author": "MichiLabs",
+  "version": "0.2.5",
+  "author": "Bundly",
   "license": "MIT",
   "private": false,
+  "main": "./build/index.js",
+  "module": "./build/index.mjs",
+  "types": "./build/index.d.ts",
+  "files": [
+    "build"
+  ],
   "scripts": {
+    "build": "tsup",
     "clean": "rm -rf build && rm -rf .turbo && rm -rf node_modules"
   },
   "dependencies": {
@@ -15,13 +21,28 @@
     "@dfinity/identity": "^0.20.2",
     "@dfinity/principal": "^0.20.2",
     "@react-native-async-storage/async-storage": "^1.21.0",
+    "expo": "^50.0.2",
     "expo-device": "^5.6.0",
+    "expo-modules-core": "^1.5.12",
     "expo-secure-store": "^12.5.0",
-    "expo-web-browser": "^12.5.0"
+    "expo-web-browser": "^12.5.0",
+    "react-native": "^0.73.2"
   },
   "devDependencies": {
-    "ts-loader": "^9.5.1",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4"
-  }
+    "@types/react": "^18.2.48",
+    "@types/react-native": "^0.73.0",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bundlydev/ic-react-native.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/bundlydev/ic-react-native/issues"
+  },
+  "homepage": "https://github.com/bundlydev/ic-react-native#readme",
+  "description": "Welcome to ic-react-native!"
 }
