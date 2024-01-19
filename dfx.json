@@ -9,7 +9,7 @@
       }
     },
     "webapp": {
-      "dependencies": ["test", "user"],
+      "dependencies": ["user"],
       "frontend": {
         "entrypoint": "frontend/apps/webapp/build/index.html"
       },

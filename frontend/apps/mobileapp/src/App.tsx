@@ -3,8 +3,9 @@ import { ExpoRoot } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Text } from "react-native";
 
+import { InternetIdentityReactNative } from "icp-connect-react-native/identity-providers";
+
 import { Client } from "@bundly/ic-core-js/client";
-import { InternetIdentityReactNative } from "@bundly/ic-react-native/identity-providers";
 import { IcpConnectContextProvider } from "@bundly/ic-react/context";
 // @ts-ignore
 import { IC_HOST, INTERNET_IDENTITY_URL } from "@env";
