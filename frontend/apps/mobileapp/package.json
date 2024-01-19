@@ -12,6 +12,7 @@
   "dependencies": {
     "@bundly/ic-core-js": "^0.1.2",
     "@bundly/ic-react": "^0.1.0",
+    "@bundly/ic-react-native": "^0.1.1",
     "big-integer": "^1.6.52",
     "classnames": "^2.5.1",
     "expo": "~49.0.15",
