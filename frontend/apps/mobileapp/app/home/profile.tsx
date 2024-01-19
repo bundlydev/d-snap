@@ -2,14 +2,12 @@ import classNames from "classnames";
 import React, { useContext, useState } from "react";
 import { Image, Pressable, Text, TextInput, View } from "react-native";
 
-import { ActorMap } from "@bundly/ic-core-js";
-import { useActor } from "@bundly/ic-react/hooks";
+import { useActor } from "ic-react";
 
-import { Canisters } from "../../src/canisters";
 import { AuthContext } from "../../src/lib/auth/auth-context";
 
 const ProfilePage = () => {
-  const user = useActor<Canisters>("user") as ActorMap<Canisters>["user"];
+  const user = useActor("user") as any;
   const { profile } = useContext(AuthContext);
   const [username, setUsername] = useState(profile?.username || "");
   const [bio, setBio] = useState(profile?.bio || "");
@@ -79,7 +77,8 @@ const ProfilePage = () => {
               });
               console.log({ result });
             } catch (error) {
-              console.log(error);
+              console.log("error on create profile");
+              console.log({ error });
             }
             setIsLoading(false);
           }}>

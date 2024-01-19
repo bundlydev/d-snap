@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 
-import { useAuth } from "@bundly/ic-react/hooks";
+import { useAuth } from "ic-react";
 
 export function AuthButton() {
   const { isAuthenticated, connect, disconnect } = useAuth();

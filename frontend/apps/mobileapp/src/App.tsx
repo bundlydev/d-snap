@@ -4,15 +4,15 @@ import { ExpoRoot } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Text } from "react-native";
 
-import { Client } from "@bundly/ic-core-js/client";
-import { InternetIdentityReactNative } from "@bundly/ic-react-native";
-import { IcpConnectContextProvider } from "@bundly/ic-react/context";
+import { Client } from "ic-core-js";
+import { IcpConnectContextProvider } from "ic-react";
+import { InternetIdentityReactNative } from "ic-react-native";
 
 import { Canisters } from "./canisters";
 import { AuthContextProvider } from "./lib/auth/auth-context";
 
 export default function App() {
-  const [client, setClient] = useState<Client<Canisters> | undefined>();
+  const [client, setClient] = useState<Client | undefined>();
 
   useEffect(() => {
     initClient();
@@ -24,10 +24,13 @@ export default function App() {
       appLink: "exp://127.0.0.1:8081/--/success", //TODO: Get this dynamically
     });
 
-    const client = Client.create<Canisters>({
-      host: IC_HOST,
+    const client = Client.create({
+      agent: {
+        host: IC_HOST,
+        verifyQuerySignatures: false,
+      },
       canisters: Canisters,
-      providers: {
+      identityProviders: {
         "internet-identity": internetIdentity,
       },
     });

@@ -2,10 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import z from "zod";
 
-import { ActorMap } from "@bundly/ic-core-js";
-import { useActor } from "@bundly/ic-react/hooks";
+import { useActor } from "ic-react";
 
-import { Canisters } from "../../src/canisters";
 import { AuthContext } from "../../src/lib/auth/auth-context";
 
 const ZResponseSchema = z.object({
@@ -26,7 +24,7 @@ type NestedArray = Array<[string, { id: string; images: { url: string }[]; descr
 
 const FeedPage = () => {
   const { profile } = useContext(AuthContext);
-  const user = useActor<Canisters>("user") as ActorMap<Canisters>["user"];
+  const user = useActor("user") as any;
   const [feed, setFeed] = useState<NestedArray>([]);
 
   useEffect(() => {

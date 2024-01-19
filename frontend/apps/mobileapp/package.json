@@ -10,9 +10,9 @@
     "clean": "rm -rf .expo && rm -rf .turbo && rm -rf node_modules"
   },
   "dependencies": {
-    "@bundly/ic-core-js": "^0.1.3",
-    "@bundly/ic-react": "^0.1.3",
-    "@bundly/ic-react-native": "^0.2.5",
+    "ic-core-js": "*",
+    "ic-react": "*",
+    "ic-react-native": "*",
     "big-integer": "^1.6.52",
     "classnames": "^2.5.1",
     "expo": "~49.0.15",

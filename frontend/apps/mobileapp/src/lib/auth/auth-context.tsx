@@ -1,10 +1,7 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 import z from "zod";
 
-import { ActorMap } from "@bundly/ic-core-js/client";
-import { useActor, useAuth } from "@bundly/ic-react/hooks";
-
-import { Canisters } from "../../canisters";
+import { useActor, useAuth } from "ic-react";
 
 export type AuthUserProfile = {
   bio: string;
@@ -48,8 +45,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
   const { isAuthenticated } = useAuth();
   // TODO: Improve this type, example below is not working
   // For now we need to force the type to infer the correct type
-  // const user = useActor<Canisters>("user");
-  const user = useActor<Canisters>("user") as ActorMap<Canisters>["user"];
+  const user = useActor("user") as any;
 
   const [profile, setProfile] = useState<AuthUserProfile | undefined>();
 

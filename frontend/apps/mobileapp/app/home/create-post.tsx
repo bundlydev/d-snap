@@ -7,10 +7,8 @@ import { Image, Pressable, Text, TextInput, View } from "react-native";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
-import { ActorMap } from "@bundly/ic-core-js";
-import { useActor } from "@bundly/ic-react/hooks";
+import { useActor } from "ic-react";
 
-import { Canisters } from "../../src/canisters";
 import { storage } from "../../src/lib/firebase";
 
 const CreatePostPage = () => {
@@ -18,7 +16,7 @@ const CreatePostPage = () => {
   const [imageRemoteUri, setImageRemoteUri] = useState<string | null>(null);
   const [description, setDescription] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
-  const user = useActor<Canisters>("user") as ActorMap<Canisters>["user"];
+  const user = useActor("user") as any;
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -30,7 +28,7 @@ const CreatePostPage = () => {
     });
 
     console.log({ result });
-    console.log(result.assets[0].uri);
+    // console.log(result.assets[0].uri);
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);

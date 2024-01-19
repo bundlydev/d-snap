@@ -11,7 +11,7 @@ import * as Device from "expo-device";
 import * as SecureStore from "expo-secure-store";
 import * as WebBrowser from "expo-web-browser";
 
-import { AppLinkParams, IdentityProvider } from "@bundly/ic-core-js";
+import { AppLinkParams, IdentityProvider } from "ic-core-js";
 
 import { InternetIdentityReactNativeConfig } from "./internet-identity-react-native.types";
 
@@ -22,7 +22,6 @@ export type StoredKey = string | CryptoKeyPair;
 
 export class InternetIdentityReactNative implements IdentityProvider {
   public readonly type = "native";
-  public name = "Internet Identity";
   private _identity: Identity = new AnonymousIdentity();
   private _key: SignIdentity | null = null;
   private _chain: DelegationChain | null = null;
