@@ -3,6 +3,8 @@ import z from "zod";
 
 import { useActor, useAuth } from "ic-react";
 
+import { Actors } from "../../canisters";
+
 export type AuthUserProfile = {
   bio: string;
   username: string;
@@ -43,10 +45,7 @@ export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
   const { isAuthenticated } = useAuth();
-  // TODO: Improve this type, example below is not working
-  // For now we need to force the type to infer the correct type
-  // const user = useActor<Canisters>("user");
-  const user = useActor("user") as any;
+  const user = useActor<Actors>("user");
 
   const [profile, setProfile] = useState<AuthUserProfile | undefined>();
 

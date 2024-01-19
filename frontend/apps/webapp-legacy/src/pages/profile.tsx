@@ -21,6 +21,8 @@ import { AuthButton } from "@app/lib/auth/auth-button";
 import { AuthContext } from "@app/lib/auth/auth-context";
 import { storage } from "@app/lib/firebase";
 
+import { Actors } from "../canisters";
+
 const ProfilePage = () => {
   useAuthGuard({ isPrivate: true });
 
@@ -35,7 +37,7 @@ const ProfilePage = () => {
       bio: profile?.bio,
     },
   });
-  const user = useActor("user") as any;
+  const user = useActor<Actors>("user");
 
   useEffect(() => {
     if (profile?.picture?.url) {

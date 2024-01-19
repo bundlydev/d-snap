@@ -4,6 +4,7 @@ import z from "zod";
 
 import { useActor } from "ic-react";
 
+import { Actors } from "../../src/canisters";
 import { AuthContext } from "../../src/lib/auth/auth-context";
 
 const ZResponseSchema = z.object({
@@ -24,7 +25,7 @@ type NestedArray = Array<[string, { id: string; images: { url: string }[]; descr
 
 const FeedPage = () => {
   const { profile } = useContext(AuthContext);
-  const user = useActor("user") as any;
+  const user = useActor<Actors>("user");
   const [feed, setFeed] = useState<NestedArray>([]);
 
   useEffect(() => {

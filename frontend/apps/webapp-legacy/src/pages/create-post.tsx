@@ -16,6 +16,8 @@ import { Textarea } from "@app/components/ui/textarea";
 import { useAuthGuard } from "@app/hooks/useRouterGuard";
 import { storage } from "@app/lib/firebase";
 
+import { Actors } from "../canisters";
+
 const CreatePostPage = () => {
   useAuthGuard({ isPrivate: true });
   const [imgUrl, setImgUrl] = useState<string | null>(null);
@@ -46,7 +48,7 @@ const CreatePostPage = () => {
     );
   };
 
-  const user = useActor("user") as any;
+  const user = useActor<Actors>("user");
   const {
     register,
     handleSubmit,

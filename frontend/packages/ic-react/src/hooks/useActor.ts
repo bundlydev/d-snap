@@ -1,9 +1,8 @@
-import { ActorMethod } from "@dfinity/agent";
 import { useContext } from "react";
 
-import { IcpConnectContext, IcpConnectContextType } from "../context";
+import { IcpConnectContext } from "../context";
 
-export const useActor = (name: string): ActorMethod => {
+export const useActor = <T, K extends keyof T = keyof T>(name: K): T[K] => {
   const { client } = useContext(IcpConnectContext);
 
   const actor = client.getActor(name);

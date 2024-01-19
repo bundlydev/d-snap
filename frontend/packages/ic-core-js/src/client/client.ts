@@ -1,7 +1,6 @@
 import { Actor, ActorMethod, AnonymousIdentity, HttpAgent, Identity } from "@dfinity/agent";
 
-import { FetchRootKeyError } from "../errors";
-import { ActorMap, ClientConfig, IdentityProviders } from "./client.types";
+import { ClientConfig, IdentityProviders } from "./client.types";
 
 export class Client {
   private actors: Record<string, ActorMethod> = {};

@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { useActor } from "ic-react";
 
+import { Actors } from "../../src/canisters";
 import { storage } from "../../src/lib/firebase";
 
 const CreatePostPage = () => {
@@ -16,7 +17,7 @@ const CreatePostPage = () => {
   const [imageRemoteUri, setImageRemoteUri] = useState<string | null>(null);
   const [description, setDescription] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
-  const user = useActor("user") as any;
+  const user = useActor<Actors>("user");
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library

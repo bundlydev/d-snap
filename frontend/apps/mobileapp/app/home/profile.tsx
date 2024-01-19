@@ -4,10 +4,11 @@ import { Image, Pressable, Text, TextInput, View } from "react-native";
 
 import { useActor } from "ic-react";
 
+import { Actors } from "../../src/canisters";
 import { AuthContext } from "../../src/lib/auth/auth-context";
 
 const ProfilePage = () => {
-  const user = useActor("user") as any;
+  const user = useActor<Actors>("user");
   const { profile } = useContext(AuthContext);
   const [username, setUsername] = useState(profile?.username || "");
   const [bio, setBio] = useState(profile?.bio || "");
