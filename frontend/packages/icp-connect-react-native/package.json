@@ -1,9 +1,19 @@
 {
   "name": "icp-connect-react-native",
   "version": "0.2.5",
+  "description": "Welcome to ic-react-native!",
   "author": "Bundly",
   "license": "MIT",
   "private": false,
+  "homepage": "https://github.com/bundlydev/ic-react-native#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bundlydev/ic-react-native.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bundlydev/ic-react-native/issues"
+  },
+  "keywords": [],
   "main": "./build/index.js",
   "module": "./build/index.mjs",
   "types": "./build/index.d.ts",
@@ -31,15 +41,5 @@
     "ts-node": "^10.9.2",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bundlydev/ic-react-native.git"
-  },
-  "keywords": [],
-  "bugs": {
-    "url": "https://github.com/bundlydev/ic-react-native/issues"
-  },
-  "homepage": "https://github.com/bundlydev/ic-react-native#readme",
-  "description": "Welcome to ic-react-native!"
+  }
 }
