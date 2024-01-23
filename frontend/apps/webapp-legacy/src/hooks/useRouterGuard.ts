@@ -14,19 +14,24 @@ export function useAuthGuard(options: AuthGuardOptions) {
   const { isAuthenticated } = useAuth();
   const { profile } = useContext(AuthContext);
 
-  console.log({ isAuthenticated, profile });
-
-  if (isAuthenticated && router.pathname === "/login") {
-    router.push("feed");
-    return;
-  }
-
   if (options.isPrivate && !isAuthenticated) {
-    router.push("login");
+    router.push("/login");
     return;
   }
 
-  if (options.isPrivate && !profile) {
-    router.push("profile");
+  if (router.pathname === "/login" && isAuthenticated) {
+    if (profile) {
+      router.push("/feed");
+    } else {
+      console.log("no profile");
+      router.push("/profile");
+    }
+    return;
+  }
+
+  if (router.pathname !== "/profile" && isAuthenticated && !profile) {
+    router.push("/profile");
+
+    return;
   }
 }
