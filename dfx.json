@@ -9,7 +9,7 @@
       }
     },
     "webapp": {
-      "dependencies": ["user"],
+      "dependencies": ["user", "internet-identity"],
       "frontend": {
         "entrypoint": "frontend/apps/webapp/build/index.html"
       },
