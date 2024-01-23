@@ -25,11 +25,11 @@
     "clean": "rm -rf build && rm -rf .turbo && rm -rf node_modules"
   },
   "dependencies": {
-    "ic-core-js": "*",
     "@dfinity/agent": "^0.20.2",
     "@dfinity/auth-client": "^0.20.2",
     "@dfinity/identity": "^0.20.2",
     "@dfinity/principal": "^0.20.2",
+    "ic-core-js": "*",
     "react": "^18.2.0"
   },
   "devDependencies": {
