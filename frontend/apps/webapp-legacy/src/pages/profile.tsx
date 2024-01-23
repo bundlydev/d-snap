@@ -2,7 +2,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { useActor } from "ic-react";
+import { AuthButton, useActor } from "ic-react";
 
 import Layout from "@app/components/layout";
 import { Button } from "@app/components/ui/button";
@@ -17,7 +17,6 @@ import {
 import { Input } from "@app/components/ui/input";
 import { Label } from "@app/components/ui/label";
 import { useAuthGuard } from "@app/hooks/useRouterGuard";
-import { AuthButton } from "@app/lib/auth/auth-button";
 import { AuthContext } from "@app/lib/auth/auth-context";
 import { storage } from "@app/lib/firebase";
 
@@ -68,6 +67,7 @@ const ProfilePage = () => {
       }
     );
   };
+
   return (
     <Layout>
       <div className="flex items-center justify-center h-screen">

@@ -16,7 +16,6 @@ export type AuthUserProfile = {
 
 export type AuthContextType = {
   profile?: AuthUserProfile;
-  isAuthenticated: boolean;
 };
 
 export type AuthContextProviderType = {
@@ -45,6 +44,7 @@ export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
   const { isAuthenticated } = useAuth();
+
   const user = useActor<Actors>("user");
 
   const [profile, setProfile] = useState<AuthUserProfile | undefined>();
@@ -79,14 +79,14 @@ export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
         setProfile(undefined);
       }
     }
+
     loadProfile();
-  }, [isAuthenticated]);
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         profile,
-        isAuthenticated,
       }}>
       {children}
     </AuthContext.Provider>

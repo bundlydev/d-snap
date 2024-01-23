@@ -1,6 +1,7 @@
+import { AuthButton } from "ic-react";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@app/components/ui/card";
 import { useAuthGuard } from "@app/hooks/useRouterGuard";
-import { AuthButton } from "@app/lib/auth/auth-button";
 
 export default function LoginPage() {
   useAuthGuard({ isPrivate: false });

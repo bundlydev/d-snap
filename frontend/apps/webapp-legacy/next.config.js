@@ -15,7 +15,6 @@ module.exports = {
 
     return config;
   },
-  transpilePackages: ["ic-core-js", "ic-react"],
-  output: "export",
+  // output: "export",
   distDir: "build",
 };

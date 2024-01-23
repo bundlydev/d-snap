@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import { useContext } from "react";
 
+import { useAuth } from "ic-react";
+
 import { AuthContext } from "../lib/auth/auth-context";
 
 export type AuthGuardOptions = {
@@ -9,7 +11,10 @@ export type AuthGuardOptions = {
 
 export function useAuthGuard(options: AuthGuardOptions) {
   const router = useRouter();
-  const { isAuthenticated, profile } = useContext(AuthContext);
+  const { isAuthenticated } = useAuth();
+  const { profile } = useContext(AuthContext);
+
+  console.log({ isAuthenticated, profile });
 
   if (isAuthenticated && router.pathname === "/login") {
     router.push("feed");
