@@ -21,7 +21,9 @@ export const KEY_STORAGE_DELEGATION = "delegation";
 export type StoredKey = string | CryptoKeyPair;
 
 export class InternetIdentityReactNative implements IdentityProvider {
-  public readonly type = "native";
+  public readonly name = "internet-identity-middleware";
+  public readonly displayName = "Internet Identity";
+  public readonly logo = "";
   private _identity: Identity = new AnonymousIdentity();
   private _key: SignIdentity | null = null;
   private _chain: DelegationChain | null = null;
@@ -98,19 +100,14 @@ export class InternetIdentityReactNative implements IdentityProvider {
 
     this._identity = identity;
 
-    if (["iOS", "iPadOS"].includes(Device.osName || "")) {
-      WebBrowser.dismissBrowser();
-    }
+    InAppBrowser.close();
   }
 
   public async connect(): Promise<void> {
     if (!this._key) throw new Error("Key not set");
 
     try {
-      // If `connect` has been called previously, then close/remove any previous windows
-      if (["iOS", "iPadOS"].includes(Device.osName || "")) {
-        WebBrowser.dismissBrowser();
-      }
+      InAppBrowser.close();
 
       const derKey = toHex(this._key.getPublicKey().toDer());
 
@@ -119,7 +116,8 @@ export class InternetIdentityReactNative implements IdentityProvider {
       url.searchParams.set("redirect_uri", encodeURIComponent(this.config.appLink));
 
       url.searchParams.set("pubkey", derKey);
-      await WebBrowser.openBrowserAsync(url.toString(), { showTitle: false });
+
+      InAppBrowser.open(url.toString());
     } catch (error) {
       throw error;
     }
@@ -143,3 +141,14 @@ export class InternetIdentityReactNative implements IdentityProvider {
     return this._identity.getPrincipal();
   }
 }
+
+export const InAppBrowser = {
+  open: (url: string) => {
+    WebBrowser.openBrowserAsync(url, { showTitle: false });
+  },
+  close: () => {
+    if (["iOS", "iPadOS"].includes(Device.osName || "")) {
+      WebBrowser.dismissBrowser();
+    }
+  },
+};
