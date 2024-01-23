@@ -3,33 +3,26 @@
 import Image from "next/image";
 
 import { Client, InternetIdentity } from "ic-core-js";
-import { IcpConnectContextProvider } from "ic-react";
+import { AuthButton, IcpConnectContextProvider } from "ic-react";
 
 import { Canisters } from "@app/canisters";
 
-import { AuthButton } from "./components/auth-button";
-import { AuthContextProvider } from "./components/auth-context";
-
 export default function Home() {
-  const internetIdentity = new InternetIdentity({
-    providerUrl: process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL,
-  });
-
   const client = Client.create({
     agent: {
       host: process.env.NEXT_PUBLIC_IC_HOST!,
     },
     canisters: Canisters,
-    identityProviders: {
-      "internet-identity": internetIdentity,
-    },
+    providers: [
+      new InternetIdentity({
+        providerUrl: process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL,
+      }),
+    ],
   });
 
   return (
     <IcpConnectContextProvider client={client}>
-      <AuthContextProvider>
-        <Content />
-      </AuthContextProvider>
+      <Content />
     </IcpConnectContextProvider>
   );
 }
