@@ -1,53 +1,38 @@
 // @ts-ignore
 import { IC_HOST, INTERNET_IDENTITY_URL } from "@env";
 import { ExpoRoot } from "expo-router";
-import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
+import React from "react";
 
 import { Client } from "ic-core-js";
 import { IcpConnectContextProvider } from "ic-react";
-import { InternetIdentityReactNative } from "ic-react-native";
+import { InternetIdentityReactNative, ReactNativeStorage } from "ic-react-native";
 
-import { Canisters } from "./canisters";
+import { canisters } from "./canisters";
 import { AuthContextProvider } from "./lib/auth/auth-context";
 
 export default function App() {
-  const [client, setClient] = useState<Client | undefined>();
-
-  useEffect(() => {
-    initClient();
-  }, []);
-
-  function initClient() {
-    const internetIdentity = new InternetIdentityReactNative({
-      providerUrl: INTERNET_IDENTITY_URL,
-      appLink: "exp://127.0.0.1:8081/--/success", //TODO: Get this dynamically
-    });
-
-    const client = Client.create({
-      agent: {
-        host: IC_HOST,
-        verifyQuerySignatures: false,
-      },
-      canisters: Canisters,
-      identityProviders: {
-        "internet-identity": internetIdentity,
-      },
-    });
-
-    setClient(client);
-  }
+  const client = Client.create({
+    agent: {
+      host: IC_HOST,
+      verifyQuerySignatures: false,
+    },
+    canisters,
+    providers: [
+      new InternetIdentityReactNative({
+        providerUrl: INTERNET_IDENTITY_URL,
+        appLink: "exp://127.0.0.1:8081/--/success", //TODO: Get this dynamically
+      }),
+    ],
+    storage: new ReactNativeStorage(),
+  });
 
   const ctx = require.context("../app");
 
-  return client ? (
-    // @ts-ignore
+  return (
     <IcpConnectContextProvider client={client}>
       <AuthContextProvider>
         <ExpoRoot context={ctx} />
       </AuthContextProvider>
     </IcpConnectContextProvider>
-  ) : (
-    <Text>Loading...</Text>
   );
 }

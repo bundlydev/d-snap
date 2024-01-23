@@ -4,8 +4,6 @@ export type Actors = {
   user: UserActor;
 };
 
-export const Canisters = {
+export const canisters = {
   user,
 };
-
-export type Canisters = typeof Canisters;
