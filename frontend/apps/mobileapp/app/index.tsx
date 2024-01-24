@@ -1,9 +1,8 @@
-import { Link } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { AuthButton } from "../src/lib/auth/auth-button";
+import { AuthButton } from "ic-react-native";
 
 const IndexPage = () => {
   return (

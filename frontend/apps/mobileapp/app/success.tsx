@@ -1,21 +1,29 @@
 import { Link, router, useLocalSearchParams } from "expo-router";
 import React, { useEffect } from "react";
-import { Text, TextBase, View } from "react-native";
+import { Text, View } from "react-native";
 
 import { AppLinkParams } from "ic-core-js";
-import { useAuth } from "ic-react";
+import { useCurrentProvider } from "ic-react";
 
 const SuccessPage = () => {
-  const { onAppLinkOpened } = useAuth();
+  const provider = useCurrentProvider();
 
   const params = useLocalSearchParams<AppLinkParams>();
 
   useEffect(() => {
     async function onLoad() {
+      if (!provider) {
+        throw new Error("Provider not found");
+      }
+
+      if (!provider.onAppLinkOpened) {
+        throw new Error("Provider does not support App Links");
+      }
+
       const { delegation, publicKey } = params;
 
       if (delegation && publicKey) {
-        await onAppLinkOpened({ delegation, publicKey });
+        await provider.onAppLinkOpened({ delegation, publicKey });
 
         router.replace("/home/profile");
       } else {
