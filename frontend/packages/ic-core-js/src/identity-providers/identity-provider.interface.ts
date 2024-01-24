@@ -13,6 +13,6 @@ export interface IdentityProvider {
   connect: () => Promise<void>;
   disconnect: () => Promise<void>;
   getIdentity: () => Identity;
-  // TODO: This is mandatory if type is "native"
+  // TODO: This is mandatory for native apps
   onAppLinkOpened?: (params: AppLinkParams) => Promise<void>;
 }
