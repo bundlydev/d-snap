@@ -1,39 +1,41 @@
 import { IcpConnectContext } from "context";
-import { useClient } from "hooks";
-import React, { useContext } from "react";
+import { useClient, useProviders } from "hooks";
+import React, { CSSProperties, useContext } from "react";
+
+import { IdentityProvider } from "ic-core-js";
 
 import { useCurrentProvider } from "../hooks/useCurrentProvider";
 
-export type AuthButtonProps = {};
+export type AuthButtonProps = {
+  loginButtonStyle: CSSProperties | undefined;
+  logoutButtonStyle: CSSProperties | undefined;
+};
 
 export function AuthButton(props: AuthButtonProps) {
   const { isAuthenticated, onConnect, onDisconnect } = useContext(IcpConnectContext);
 
   return isAuthenticated ? (
-    <LogoutButton onDisconnect={onDisconnect} />
+    <LogoutButton onDisconnect={onDisconnect} style={props.logoutButtonStyle} />
   ) : (
-    <LoginButton onConnect={onConnect} />
+    <LoginButton onConnect={onConnect} style={props.loginButtonStyle} />
   );
 }
 
 export type LoginButtonProps = {
   onConnect: () => void;
   children?: React.ReactNode;
+  style?: CSSProperties;
 };
 
 function LoginButton(props: LoginButtonProps) {
   const client = useClient();
-  // TODO: implement this instead of client
-  // const provider = useCurrentProvider();
+  const providers = useProviders();
 
   async function login() {
     try {
-      await client.setCurrentProvider("internet-identity");
-      const provider = client.getCurrentProvider();
+      const provider = selectProvider(providers);
 
-      if (!provider) {
-        throw new Error("No identity provider selected");
-      }
+      await client.setCurrentProvider(provider.name);
 
       await provider.connect();
       props.onConnect();
@@ -44,7 +46,7 @@ function LoginButton(props: LoginButtonProps) {
   }
 
   return (
-    <button onClick={() => login()} style={styles.button}>
+    <button onClick={() => login()} style={props.style || styles.button}>
       {props.children || "Login"}
     </button>
   );
@@ -53,6 +55,7 @@ function LoginButton(props: LoginButtonProps) {
 export type LogoutButtonProps = {
   onDisconnect: () => void;
   children?: React.ReactNode;
+  style?: CSSProperties;
 };
 
 function LogoutButton(props: LogoutButtonProps) {
@@ -75,25 +78,34 @@ function LogoutButton(props: LogoutButtonProps) {
   }
 
   return (
-    <button onClick={() => logout()} style={styles.button}>
+    <button onClick={() => logout()} style={props.style || styles.button}>
       {props.children || "Logout"}
     </button>
   );
 }
 
+function selectProvider(providers: IdentityProvider[]): IdentityProvider {
+  if (providers.length === 0) {
+    throw new Error("No providers available");
+  }
+
+  if (providers.length === 1) {
+    return providers[0];
+  }
+
+  // TODO: Display view to select provider
+  return providers[0];
+}
+
 const styles = {
   button: {
-    backgroundColor: "white",
+    "background-color": "white",
     color: "black",
     padding: "8px 16px",
-    borderRadius: "4px",
+    border: "1px solid #ccc",
+    "border-radius": "4px",
     cursor: "pointer",
-    border: "none",
-    outline: "none",
     transition: "background-color 0.3s ease-in-out",
-    // Define el estilo para el hover
-    ":hover": {
-      backgroundColor: "lightgray",
-    },
+    "box-shadow": "0 2px 4px rgba(0, 0, 0, 0.1)",
   },
 };
