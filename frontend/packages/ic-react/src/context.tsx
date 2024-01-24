@@ -1,7 +1,6 @@
-import { Identity } from "@dfinity/agent";
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 
-import { Client, IdentityProvider } from "ic-core-js";
+import { Client } from "ic-core-js";
 
 export type IcpConnectContextType = {
   client: Client;
