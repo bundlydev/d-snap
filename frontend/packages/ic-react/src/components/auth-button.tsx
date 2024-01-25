@@ -1,9 +1,9 @@
-import { IcpConnectContext } from "context";
 import { useClient, useProviders } from "hooks";
 import React, { CSSProperties, useContext } from "react";
 
 import { IdentityProvider } from "ic-core-js";
 
+import { IcpConnectContext } from "../context";
 import { useCurrentProvider } from "../hooks/useCurrentProvider";
 
 export type AuthButtonProps = {
