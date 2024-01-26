@@ -1,12 +1,12 @@
+import { AnonymousIdentity, Identity } from "@dfinity/agent";
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 
 import { Client } from "ic-core-js";
 
 export type IcpConnectContextType = {
   client: Client;
+  identity: Identity;
   isAuthenticated: boolean;
-  onConnect: () => Promise<void>;
-  onDisconnect: () => Promise<void>;
 };
 
 export type IcpConnectContextProviderProps = {
@@ -19,33 +19,49 @@ export const IcpConnectContext = createContext<IcpConnectContextType>({} as any)
 export const IcpConnectContextProvider = (props: IcpConnectContextProviderProps) => {
   const [initialized, setInitialized] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [identity, setIdentity] = useState<Identity>(new AnonymousIdentity());
   const [client] = useState<Client>(props.client);
 
   useEffect(() => {
-    async function bootstrap() {
-      await client.init();
-      const currentProvider = client.getCurrentProvider();
-
-      if (!currentProvider) {
-        setIsAuthenticated(false);
-        setInitialized(true);
-        return;
-      }
-
-      const isAuthenticated = !client.getIdentity().getPrincipal().isAnonymous();
-
-      setIsAuthenticated(isAuthenticated);
-      setInitialized(true);
-    }
-
     bootstrap();
   }, []);
 
-  async function onConnect() {
-    setIsAuthenticated(true);
+  async function bootstrap() {
+    await client.init();
+    setListeners(client);
+
+    const currentProvider = client.getCurrentProvider();
+
+    if (!currentProvider) {
+      disconnectHandler();
+      setInitialized(true);
+      return;
+    }
+
+    const identity = client.getIdentity();
+    const isAuthenticated = !identity.getPrincipal().isAnonymous();
+
+    setIdentity(identity);
+    setIsAuthenticated(isAuthenticated);
+    setInitialized(true);
   }
 
-  async function onDisconnect() {
+  function setListeners(client: Client) {
+    client.eventListener.connectSuccess((payload) => {
+      client.replaceIdentity(payload.identity);
+      setIdentity(payload.identity);
+      setIsAuthenticated(true);
+    });
+
+    client.eventListener.disconnectSuccess(() => {
+      disconnectHandler();
+    });
+  }
+
+  function disconnectHandler() {
+    const anonymousIdentity = new AnonymousIdentity();
+    client.replaceIdentity(anonymousIdentity);
+    setIdentity(anonymousIdentity);
     setIsAuthenticated(false);
   }
 
@@ -54,9 +70,8 @@ export const IcpConnectContextProvider = (props: IcpConnectContextProviderProps)
       <IcpConnectContext.Provider
         value={{
           client,
+          identity,
           isAuthenticated,
-          onConnect,
-          onDisconnect,
         }}>
         {props.children}
       </IcpConnectContext.Provider>
