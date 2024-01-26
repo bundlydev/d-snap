@@ -80,7 +80,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
     }
 
     loadProfile();
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider
