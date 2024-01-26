@@ -1,9 +1,8 @@
 import { useRouter } from "next/router";
-import { useContext } from "react";
 
 import { useAuth } from "ic-react";
 
-import { AuthContext } from "../lib/auth/auth-context";
+import { useProfile } from "./useProfile";
 
 export type AuthGuardOptions = {
   isPrivate: boolean;
@@ -12,7 +11,7 @@ export type AuthGuardOptions = {
 export function useAuthGuard(options: AuthGuardOptions) {
   const router = useRouter();
   const { isAuthenticated } = useAuth();
-  const { profile } = useContext(AuthContext);
+  const profile = useProfile();
 
   if (options.isPrivate && !isAuthenticated) {
     router.push("/login");
@@ -23,7 +22,6 @@ export function useAuthGuard(options: AuthGuardOptions) {
     if (profile) {
       router.push("/feed");
     } else {
-      console.log("no profile");
       router.push("/profile");
     }
     return;

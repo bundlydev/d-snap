@@ -137,7 +137,6 @@ const CreatePostPage = () => {
                     images: [{ url: imgUrl }],
                     description: data.description,
                   });
-                  console.log({ result });
                 } catch (error) {
                   console.log(error);
                 }

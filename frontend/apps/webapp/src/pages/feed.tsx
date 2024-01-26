@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import z from "zod";
 
 import { useActor } from "ic-react";
@@ -9,8 +9,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@app/components/ui/avatar";
 import { Button } from "@app/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@app/components/ui/card";
 import { ScrollArea } from "@app/components/ui/scroll-area";
+import { useProfile } from "@app/hooks/useProfile";
 import { useAuthGuard } from "@app/hooks/useRouterGuard";
-import { AuthContext } from "@app/lib/auth/auth-context";
 
 import { Actors } from "../canisters";
 
@@ -33,7 +33,7 @@ const ZResponseSchema = z.object({
 
 const FeedPage = () => {
   useAuthGuard({ isPrivate: true });
-  const { profile } = useContext(AuthContext);
+  const profile = useProfile();
   const user = useActor<Actors>("user");
   const [feed, setFeed] = useState<NestedArray>([]);
   useEffect(() => {

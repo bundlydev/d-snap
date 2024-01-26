@@ -1,9 +1,9 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, use, useEffect, useState } from "react";
 import z from "zod";
 
 import { useActor, useAuth } from "ic-react";
 
-import { Actors } from "../../canisters";
+import { Actors } from "../canisters";
 
 export type AuthUserProfile = {
   bio: string;
@@ -43,7 +43,8 @@ const ZResponseSchema = z
 export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
-  const { isAuthenticated } = useAuth();
+  const [isReady, setIsReady] = useState(false);
+  const { isAuthenticated, identity } = useAuth();
 
   const user = useActor<Actors>("user");
 
@@ -51,6 +52,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
 
   useEffect(() => {
     async function loadProfile() {
+      console.log("loadProfile");
+      console.log({ isAuthenticated, principal: identity?.getPrincipal().toString() });
       if (isAuthenticated) {
         try {
           const response = await user.getProfile();
@@ -77,17 +80,21 @@ export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
       } else {
         setProfile(undefined);
       }
+
+      setIsReady(true);
     }
 
     loadProfile();
   }, [isAuthenticated]);
 
   return (
-    <AuthContext.Provider
-      value={{
-        profile,
-      }}>
-      {children}
-    </AuthContext.Provider>
+    isReady && (
+      <AuthContext.Provider
+        value={{
+          profile,
+        }}>
+        {children}
+      </AuthContext.Provider>
+    )
   );
 };

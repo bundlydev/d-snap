@@ -5,7 +5,7 @@ import { AppProps } from "next/app";
 import { Client, InternetIdentity } from "ic-core-js";
 import { IcpConnectContextProvider } from "ic-react";
 
-import { AuthContextProvider } from "@app/lib/auth/auth-context";
+import { AuthContextProvider } from "@app/context/auth-context";
 
 import "../app/globals.css";
 import { canisters } from "../canisters";

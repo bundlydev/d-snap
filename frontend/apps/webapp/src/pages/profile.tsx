@@ -1,5 +1,5 @@
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { AuthButton, useActor } from "ic-react";
@@ -16,8 +16,8 @@ import {
 } from "@app/components/ui/card";
 import { Input } from "@app/components/ui/input";
 import { Label } from "@app/components/ui/label";
+import { useProfile } from "@app/hooks/useProfile";
 import { useAuthGuard } from "@app/hooks/useRouterGuard";
-import { AuthContext } from "@app/lib/auth/auth-context";
 import { storage } from "@app/lib/firebase";
 
 import { Actors } from "../canisters";
@@ -25,7 +25,7 @@ import { Actors } from "../canisters";
 const ProfilePage = () => {
   useAuthGuard({ isPrivate: true });
 
-  const { profile } = useContext(AuthContext);
+  const profile = useProfile();
 
   const [imgUrl, setImgUrl] = useState<string | null>(null);
   const [progressPercent, setProgressPercent] = useState(0);

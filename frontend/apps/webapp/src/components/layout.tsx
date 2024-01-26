@@ -2,10 +2,11 @@ import Link from "next/link";
 import { ReactNode, useContext } from "react";
 
 import { Button } from "@app/components/ui/button";
-import { AuthContext } from "@app/lib/auth/auth-context";
+import { useProfile } from "@app/hooks/useProfile";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const { profile } = useContext(AuthContext);
+  const profile = useProfile();
+
   return (
     <div className="w-[500px] h-screen relative mx-auto">
       <main>{children}</main>
