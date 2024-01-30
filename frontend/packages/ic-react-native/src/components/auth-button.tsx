@@ -1,55 +1,38 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Button } from "react-native";
 
-import { IcpConnectContext, useClient, useCurrentProvider } from "ic-react";
-
-export type LoginConfig = {
-  maxTimeToLive?: bigint;
-  derivationOrigin?: string | URL;
-  windowOpenerFeatures?: string;
-};
+import { IdentityProvider } from "ic-core-js";
+import { useAuth, useClient, useCurrentProvider, useProviders } from "ic-react";
 
 export type AuthButtonProps = {
   login?: {
     text?: string;
-    config?: LoginConfig;
   };
 };
 
 export function AuthButton(props: AuthButtonProps) {
-  const { isAuthenticated, onConnect, onDisconnect } = useContext(IcpConnectContext);
+  const { isAuthenticated } = useAuth();
 
-  return isAuthenticated ? (
-    <LogoutButton onDisconnect={onDisconnect} />
-  ) : (
-    <LoginButton onConnect={onConnect} />
-  );
+  return isAuthenticated ? <LogoutButton /> : <LoginButton />;
 }
 
 export type LoginButtonProps = {
-  onConnect: () => void;
   title?: string;
 };
 
 function LoginButton(props: LoginButtonProps) {
   const client = useClient();
-  // TODO: implement this instead of client
-  // const provider = useCurrentProvider();
+  const providers = useProviders();
 
   async function login() {
     try {
-      await client.setCurrentProvider("internet-identity-middleware");
-      const provider = client.getCurrentProvider();
+      const provider = selectProvider(providers);
 
-      if (!provider) {
-        throw new Error("No identity provider selected");
-      }
+      await client.setCurrentProvider(provider.name);
 
       await provider.connect();
-      // Connect notification to context happens on success page
     } catch (error) {
-      console.error(error);
-      throw error;
+      await client.removeCurrentProvider();
     }
   }
 
@@ -57,7 +40,6 @@ function LoginButton(props: LoginButtonProps) {
 }
 
 export type LogoutButtonProps = {
-  onDisconnect: () => void;
   title?: string;
 };
 
@@ -73,7 +55,6 @@ function LogoutButton(props: LogoutButtonProps) {
     try {
       await provider.disconnect();
       await client.removeCurrentProvider();
-      props.onDisconnect();
     } catch (error) {
       console.error(error);
       throw error;
@@ -81,4 +62,17 @@ function LogoutButton(props: LogoutButtonProps) {
   }
 
   return <Button onPress={() => logout()} title={props.title || "Logout"} />;
+}
+
+function selectProvider(providers: IdentityProvider[]): IdentityProvider {
+  if (providers.length === 0) {
+    throw new Error("No providers available");
+  }
+
+  if (providers.length === 1) {
+    return providers[0];
+  }
+
+  // TODO: Display view to select provider
+  return providers[0];
 }
