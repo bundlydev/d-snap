@@ -1,6 +1,6 @@
-import Layout from "@/components/layout";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useAuthGuard } from "@/hooks/useRouterGuard";
+import Layout from "@app/components/layout";
+import { Avatar, AvatarFallback, AvatarImage } from "@app/components/ui/avatar";
+import { useAuthGuard } from "@app/hooks/useRouterGuard";
 
 const InboxPage = () => {
   useAuthGuard({ isPrivate: true });

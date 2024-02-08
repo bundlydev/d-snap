@@ -1,25 +1,31 @@
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import Layout from "@/components/layout";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useAuthGuard } from "@/hooks/useRouterGuard";
-import { AuthButton } from "@/lib/auth/auth-button";
-import { AuthContext } from "@/lib/auth/auth-context";
-import { storage } from "@/lib/firebase";
-import { ActorMap } from "@bundly/ic-core-js/client";
-import { useActor } from "@bundly/ic-react/hooks";
+import { AuthButton, useActor } from "@bundly/ic-react";
 
-import { Canisters } from "../canisters";
+import Layout from "@app/components/layout";
+import { Button } from "@app/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@app/components/ui/card";
+import { Input } from "@app/components/ui/input";
+import { Label } from "@app/components/ui/label";
+import { useProfile } from "@app/hooks/useProfile";
+import { useAuthGuard } from "@app/hooks/useRouterGuard";
+import { storage } from "@app/lib/firebase";
+
+import { Actors } from "../canisters";
 
 const ProfilePage = () => {
   useAuthGuard({ isPrivate: true });
 
-  const { profile } = useContext(AuthContext);
+  const profile = useProfile();
 
   const [imgUrl, setImgUrl] = useState<string | null>(null);
   const [progressPercent, setProgressPercent] = useState(0);
@@ -30,7 +36,7 @@ const ProfilePage = () => {
       bio: profile?.bio,
     },
   });
-  const user = useActor<Canisters>("user") as ActorMap<Canisters>["user"];
+  const user = useActor<Actors>("user");
 
   useEffect(() => {
     if (profile?.picture?.url) {
@@ -61,6 +67,7 @@ const ProfilePage = () => {
       }
     );
   };
+
   return (
     <Layout>
       <div className="flex items-center justify-center h-screen">

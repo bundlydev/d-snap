@@ -15,7 +15,6 @@ module.exports = {
 
     return config;
   },
-  transpilePackages: ["@bundly/ic-core-js", "@bundly/ic-react"],
   output: "export",
   distDir: "build",
 };

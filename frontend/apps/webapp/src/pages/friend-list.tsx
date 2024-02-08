@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import Layout from "@/components/layout";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { useAuthGuard } from "@/hooks/useRouterGuard";
+import Layout from "@app/components/layout";
+import { Avatar, AvatarFallback, AvatarImage } from "@app/components/ui/avatar";
+import { Button } from "@app/components/ui/button";
+import { Card, CardHeader } from "@app/components/ui/card";
+import { ScrollArea } from "@app/components/ui/scroll-area";
+import { useAuthGuard } from "@app/hooks/useRouterGuard";
 
 const FriendListPage = () => {
   useAuthGuard({ isPrivate: true });

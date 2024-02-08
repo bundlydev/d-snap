@@ -1,52 +1,41 @@
-// @ts-ignore
 import { ExpoRoot } from "expo-router";
-import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
+import React from "react";
 
-import { InternetIdentityReactNative } from "icp-connect-react-native/identity-providers";
+import { Client } from "@bundly/ic-core-js";
+import { IcpConnectContextProvider } from "@bundly/ic-react";
+import { InternetIdentityReactNative, ReactNativeStorage } from "@bundly/ic-react-native";
 
-import { Client } from "@bundly/ic-core-js/client";
-import { IcpConnectContextProvider } from "@bundly/ic-react/context";
-// @ts-ignore
-import { IC_HOST, INTERNET_IDENTITY_URL } from "@env";
-
-import { Canisters } from "./canisters";
+import { canisters } from "./canisters";
 import { AuthContextProvider } from "./lib/auth/auth-context";
+import { AppBrowser } from "./lib/in-app-browser";
+
+const { EXPO_PUBLIC_INTERNET_IDENTITY_URL, EXPO_PUBLIC_APP_LINK, EXPO_PUBLIC_IC_HOST_URL } = process.env;
 
 export default function App() {
-  const [client, setClient] = useState<Client<Canisters> | undefined>();
+  const client = Client.create({
+    agent: {
+      host: EXPO_PUBLIC_IC_HOST_URL,
+      verifyQuerySignatures: false,
+    },
+    canisters,
+    providers: [
+      new InternetIdentityReactNative({
+        providerUrl: EXPO_PUBLIC_INTERNET_IDENTITY_URL!,
+        appLink: `${EXPO_PUBLIC_APP_LINK}/--/success`,
+        inAppBrowser: AppBrowser,
+      }),
+    ],
+    storage: new ReactNativeStorage(),
+  });
 
-  useEffect(() => {
-    initClient();
-  }, []);
+  // @ts-ignore
+  const ctx = require.context("./screens");
 
-  function initClient() {
-    const internetIdentity = new InternetIdentityReactNative({
-      providerUrl: INTERNET_IDENTITY_URL,
-      appLink: "exp://127.0.0.1:8081/--/success", //TODO: Get this dynamically
-    });
-
-    const client = Client.create<Canisters>({
-      host: IC_HOST,
-      canisters: Canisters,
-      providers: {
-        "internet-identity": internetIdentity,
-      },
-    });
-
-    setClient(client);
-  }
-
-  const ctx = require.context("../app");
-
-  return client ? (
-    // @ts-ignore
+  return (
     <IcpConnectContextProvider client={client}>
       <AuthContextProvider>
         <ExpoRoot context={ctx} />
       </AuthContextProvider>
     </IcpConnectContextProvider>
-  ) : (
-    <Text>Loading...</Text>
   );
 }

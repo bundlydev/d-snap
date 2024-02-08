@@ -1,18 +1,18 @@
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import z from "zod";
 
-import Layout from "@/components/layout";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { useAuthGuard } from "@/hooks/useRouterGuard";
-import { AuthContext } from "@/lib/auth/auth-context";
-import { ActorMap } from "@bundly/ic-core-js/client";
-import { useActor } from "@bundly/ic-react/hooks";
+import { useActor } from "@bundly/ic-react";
 
-import { Canisters } from "../canisters";
+import Layout from "@app/components/layout";
+import { Avatar, AvatarFallback, AvatarImage } from "@app/components/ui/avatar";
+import { Button } from "@app/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@app/components/ui/card";
+import { ScrollArea } from "@app/components/ui/scroll-area";
+import { useProfile } from "@app/hooks/useProfile";
+import { useAuthGuard } from "@app/hooks/useRouterGuard";
+
+import { Actors } from "../canisters";
 
 type NestedArray = Array<[string, { id: string; images: { url: string }[]; description: string }]>;
 
@@ -33,8 +33,8 @@ const ZResponseSchema = z.object({
 
 const FeedPage = () => {
   useAuthGuard({ isPrivate: true });
-  const { profile } = useContext(AuthContext);
-  const user = useActor<Canisters>("user") as ActorMap<Canisters>["user"];
+  const profile = useProfile();
+  const user = useActor<Actors>("user");
   const [feed, setFeed] = useState<NestedArray>([]);
   useEffect(() => {
     async function run() {

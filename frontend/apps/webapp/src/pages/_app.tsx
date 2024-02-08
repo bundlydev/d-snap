@@ -1,46 +1,33 @@
-import { AppProps } from "next/app";
-import { useEffect, useState } from "react";
+"use client";
 
-import { AppLoader } from "@/components/app-loader";
-import { AuthContextProvider } from "@/lib/auth/auth-context";
-import { Client } from "@bundly/ic-core-js/client";
-import { InternetIdentity } from "@bundly/ic-core-js/identity-providers";
-import { IcpConnectContextProvider } from "@bundly/ic-react/context";
+import { AppProps } from "next/app";
+
+import { Client, InternetIdentity } from "@bundly/ic-core-js";
+import { IcpConnectContextProvider } from "@bundly/ic-react";
+
+import { AuthContextProvider } from "@app/context/auth-context";
 
 import "../app/globals.css";
-import { Canisters } from "../canisters";
+import { canisters } from "../canisters";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const [client, setClient] = useState<Client<Canisters> | undefined>();
-
-  useEffect(() => {
-    initClient();
-  }, []);
-
-  function initClient() {
-    const internetIdentity = new InternetIdentity({
-      providerUrl: process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL,
-    });
-
-    const client = Client.create<Canisters>({
+  const client = Client.create({
+    agent: {
       host: process.env.NEXT_PUBLIC_IC_HOST!,
-      canisters: Canisters,
-      providers: {
-        "internet-identity": internetIdentity,
-      },
-    });
+    },
+    canisters,
+    providers: [
+      new InternetIdentity({
+        providerUrl: process.env.NEXT_PUBLIC_INTERNET_IDENTITY_URL,
+      }),
+    ],
+  });
 
-    setClient(client);
-  }
-
-  return client ? (
-    // @ts-ignore
+  return (
     <IcpConnectContextProvider client={client}>
       <AuthContextProvider>
         <Component {...pageProps} />
       </AuthContextProvider>
     </IcpConnectContextProvider>
-  ) : (
-    <AppLoader />
   );
 }

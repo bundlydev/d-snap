@@ -3,20 +3,20 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import Layout from "@/components/layout";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Textarea } from "@/components/ui/textarea";
-import { useAuthGuard } from "@/hooks/useRouterGuard";
-import { storage } from "@/lib/firebase";
-import { ActorMap } from "@bundly/ic-core-js/client";
-import { useActor } from "@bundly/ic-react/hooks";
+import { useActor } from "@bundly/ic-react";
 
-import { Canisters } from "../canisters";
+import Layout from "@app/components/layout";
+import { Avatar, AvatarFallback, AvatarImage } from "@app/components/ui/avatar";
+import { Button } from "@app/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@app/components/ui/card";
+import { Input } from "@app/components/ui/input";
+import { Label } from "@app/components/ui/label";
+import { ScrollArea } from "@app/components/ui/scroll-area";
+import { Textarea } from "@app/components/ui/textarea";
+import { useAuthGuard } from "@app/hooks/useRouterGuard";
+import { storage } from "@app/lib/firebase";
+
+import { Actors } from "../canisters";
 
 const CreatePostPage = () => {
   useAuthGuard({ isPrivate: true });
@@ -48,7 +48,7 @@ const CreatePostPage = () => {
     );
   };
 
-  const user = useActor<Canisters>("user") as ActorMap<Canisters>["user"];
+  const user = useActor<Actors>("user");
   const {
     register,
     handleSubmit,
@@ -137,7 +137,6 @@ const CreatePostPage = () => {
                     images: [{ url: imgUrl }],
                     description: data.description,
                   });
-                  console.log({ result });
                 } catch (error) {
                   console.log(error);
                 }
