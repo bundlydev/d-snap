@@ -2,8 +2,8 @@
 
 import { AppProps } from "next/app";
 
-import { Client, InternetIdentity } from "ic-core-js";
-import { IcpConnectContextProvider } from "ic-react";
+import { Client, InternetIdentity } from "@bundly/ic-core-js";
+import { IcpConnectContextProvider } from "@bundly/ic-react";
 
 import { AuthContextProvider } from "@app/context/auth-context";
 

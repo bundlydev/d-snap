@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import z from "zod";
 
-import { useActor } from "ic-react";
+import { useActor } from "@bundly/ic-react";
 
 import Layout from "@app/components/layout";
 import { Avatar, AvatarFallback, AvatarImage } from "@app/components/ui/avatar";

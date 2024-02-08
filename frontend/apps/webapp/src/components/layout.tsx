@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ReactNode, useContext } from "react";
+import { ReactNode } from "react";
 
 import { Button } from "@app/components/ui/button";
 import { useProfile } from "@app/hooks/useProfile";

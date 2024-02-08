@@ -1,5 +1,3 @@
-import React from "react";
-
 export const AppLoader = () => {
   return (
     <div style={fullscreenStyle}>
