@@ -2,20 +2,66 @@
 
 Welcome to your new dSnap project and to the internet computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
 
-To get started, you might want to explore the project directory structure. Working with this project in your development environment will not affect any production deployment or identity tokens.
+It contains the development of a middleware tool that we use to authenticate users using Internet Identity on mobile devices.
 
-If you want to start working on your project right away, you might want to try the following commands:
+## Project structure
 
-TODO: add instructions to build frontend bundle
+backend
+
+- canisters
+  - user
+- packages
+  - Image.mo
+  - Utils.mo
+
+frontend
+
+- apps
+  - internet-identity-middleware
+  - mobileapp
+  - webapp
+- packages
+  - ic-core-js
+  - ic-react
+  - ic-react-native
+
+## Installing OS Dependencies
+
+### UNIX/Linux
 
 ```bash
-dfx help
-dfx canister --help
+sudo apt install clang
+sudo apt install build-essential
+sudo apt install libssl-dev
+sudo apt install pkg-config
 ```
+
+### Mac
+
+```bash
+xcode-select --install
+```
+
+## Install project dependencies
+
+```bash
+sh -ci "$(curl -fsSL https://smartcontracts.org/install.sh)"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install 18
+nvm use 18
+yarn global add turbo
+yarn
+```
+
+## Environment variables setup
+
+Some apps contain a `.env-example` file; you must copy it in the same location and replace the values with your own.
 
 ## Running the project locally
 
 If you want to test your project locally, you can use the following commands:
+
+<<<<<<< HEAD
 
 ```bash
 # Starts the replica, running in the background
@@ -25,7 +71,107 @@ dfx start --background
 dfx deploy
 ```
 
-Once the job completes, your application will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
+# Once the job completes, your application will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
+
+### Run local replica
+
+```bash
+# Starts a local ICP replica, running in the background
+yarn serve
+```
+
+Or run a clean replica:
+
+```bash
+# Starts a local ICP replica, running in the background. It cleans existing data (incluiding canister ids and stable memory)
+yarn serve:clean
+```
+
+### Prepare project
+
+```bash
+# Generates canister type declarations
+yarn generate
+
+# Register unique canister identifiers on th local network
+yarn canister:local:create
+```
+
+### Run apps
+
+```bash
+# Deploys backend canisters to the local replica and generates their candid interface
+# Once the job completes, your application will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
+yarn deploy:local:backend
+
+# Run frontend apps in dev mode
+yarn dev
+```
+
+### Run canister changes
+
+```bash
+# Generates canister type declarations
+yarn generate
+
+# Deploys backend canisters to the local replica and generates their candid interface
+yarn deploy:local:backend
+
+# Run frontend apps in dev mode
+yarn dev
+```
+
+### Adding a new backend canister
+
+If you create a new backend canister, you need to build its corresponding types to enable it for the frontend. Follow these steps:
+
+```bash
+# Generates canister type declarations
+yarn generate
+
+# Deploys backend canisters to the local replica and generates their candid interface
+yarn deploy:local:backend
+
+# Run frontend apps in dev mode
+yarn dev
+```
+
+### Test frontend apps in local replica
+
+Once you are ready, if you want to test your frontend code before deploying it to the mainnet, follow these steps:
+
+```bash
+# Generates canister type declarations
+yarn generate
+
+# Builds frontend production bundles
+yarn build
+
+# Deploys all canisters to the local replica and generates their candid interface
+yarn deploy:local
+```
+
+### Troubleshoting
+
+#### Start clean replica
+
+Every time you run ` yarn serve:clean`, follow it up with `yarn canister:local:create` and `yarn deploy:local:backend`, then run `yarn dev`.
+
+## General troubleshoting
+
+### Out of cycles
+
+If you receive an error like this:
+
+```
+The replica returned a replica error: reject code CanisterError, reject message Canister aaaaa-aaaaa-aaaaa-aaaaa-aaa is out of cycles: please top up the canister with at least 2_301_457_384_782 additional cycles, error code None
+```
+
+Run `yarn stop` and `yarn serve:clean`
+
+## DOC DEPRECATED
+
+> > > > > > > develop
 
 If you have made changes to your backend canister, you can generate a new candid interface with
 
@@ -33,7 +179,12 @@ If you have made changes to your backend canister, you can generate a new candid
 npm run generate
 ```
 
+<<<<<<< HEAD
 at any time. This is recommended before starting the frontend development server, and will be run automatically any time you run `dfx deploy`.
+
+=======
+
+> > > > > > > develop
 
 ### Note on frontend environment variables
 
