@@ -8,8 +8,8 @@ import { _SERVICE } from "../declarations/user/user.did.js";
 export type UserActor = ActorSubclass<_SERVICE>;
 
 export const user: Canister = {
-  idlFactory: idlFactory as any,
+  idlFactory,
   configuration: {
-    canisterId: process.env.USER_CANISTER_ID!,
+    canisterId: process.env.EXPO_PUBLIC_USER_CANISTER_ID!,
   },
 };

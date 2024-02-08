@@ -1,9 +1,9 @@
 {
   "name": "dsnap",
   "version": "0.1.0",
-  "private": true,
+  "main": "index.js",
   "scripts": {
-    "dev": "expo start --reset-cache",
+    "dev": "expo start --clear",
     "dev:android": "expo start --android",
     "dev:ios": "expo start --ios",
     "dev:web": "expo start --web",
@@ -35,7 +35,6 @@
     "react-native-screens": "~3.29.0",
     "react-native-svg": "13.9.0",
     "react-native-url-polyfill": "^2.0.0",
-    "react-native-web": "~0.19.6",
     "text-encoding": "^0.7.0",
     "uuid": "^9.0.1"
   },
