@@ -1,15 +1,14 @@
 import { ActorSubclass } from "@dfinity/agent";
 
-import { Canister } from "ic-core-js";
+import { Canister } from "@bundly/ic-core-js";
 
-// @ts-ignore
-import { idlFactory } from "../declarations/user/user.did.js";
+import { idlFactory } from "../declarations/user/user.did";
 import { _SERVICE } from "../declarations/user/user.did.js";
 
 export type UserActor = ActorSubclass<_SERVICE>;
 
 export const user: Canister = {
-  idlFactory,
+  idlFactory: idlFactory as any,
   configuration: {
     canisterId: process.env.USER_CANISTER_ID!,
   },

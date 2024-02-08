@@ -7,10 +7,10 @@ import { Image, Pressable, Text, TextInput, View } from "react-native";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
-import { useActor } from "ic-react";
+import { useActor } from "@bundly/ic-react";
 
-import { Actors } from "../../src/canisters";
-import { storage } from "../../src/lib/firebase";
+import { Actors } from "../../canisters";
+import { storage } from "../../lib/firebase";
 
 const CreatePostPage = () => {
   const [image, setImage] = useState<string | null>(null);

@@ -2,10 +2,10 @@ import classNames from "classnames";
 import React, { useContext, useState } from "react";
 import { Image, Pressable, Text, TextInput, View } from "react-native";
 
-import { useActor } from "ic-react";
+import { useActor } from "@bundly/ic-react";
 
-import { Actors } from "../../src/canisters";
-import { AuthContext } from "../../src/lib/auth/auth-context";
+import { Actors } from "../../canisters";
+import { AuthContext } from "../../lib/auth/auth-context";
 
 const ProfilePage = () => {
   const user = useActor<Actors>("user");

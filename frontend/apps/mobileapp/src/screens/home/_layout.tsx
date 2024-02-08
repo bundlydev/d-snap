@@ -4,7 +4,7 @@ import React from "react";
 import { Image, Pressable, View } from "react-native";
 import { SafeAreaView } from "react-native";
 
-import "../../globals.css";
+import "../../../globals.css";
 
 const LayoutHome = () => {
   const profile = {

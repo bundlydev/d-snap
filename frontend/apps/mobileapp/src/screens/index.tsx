@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { AuthButton } from "ic-react-native";
+import { AuthButton } from "../components/auth-button";
 
 const IndexPage = () => {
   return (

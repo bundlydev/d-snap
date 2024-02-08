@@ -2,8 +2,8 @@ import { Link, router, useLocalSearchParams } from "expo-router";
 import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 
-import { AppLinkParams } from "ic-core-js";
-import { useCurrentProvider } from "ic-react";
+import { AppLinkParams } from "@bundly/ic-core-js";
+import { useCurrentProvider } from "@bundly/ic-react";
 
 const SuccessPage = () => {
   const provider = useCurrentProvider();
@@ -25,7 +25,7 @@ const SuccessPage = () => {
       if (delegation && publicKey) {
         await provider.onAppLinkOpened({ delegation, publicKey });
 
-        router.replace("/home/profile");
+        router.replace("/home/profile" as any);
       } else {
         console.warn("Invalid App Link Params");
       }
@@ -37,7 +37,7 @@ const SuccessPage = () => {
   return (
     <View>
       <Text>Success page</Text>
-      <Link replace href="/home/feed">
+      <Link replace href={"/home/feed" as any}>
         <Text>Go Home</Text>
       </Link>
     </View>
