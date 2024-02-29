@@ -16,7 +16,7 @@ function setCanisterVariables(canisterNames, relativeRootPath) {
     const variables = [];
 
     for (const name of canisterNames) {
-      const variableName = `${name.toUpperCase()}_CANISTER_ID`;
+      const variableName = `EXPO_PUBLIC_${name.toUpperCase()}_CANISTER_ID_TEST`;
 
       process.env[variableName] = canisters[name][network];
 
@@ -47,8 +47,6 @@ function copyDeclarations(canisterNames, relativeRootPath) {
       const dest = path.resolve("./src/declarations", dirent.name);
       fs.cpSync(source, dest, { recursive: true });
     });
-
-  console.log("Declarations copied", canisterNames);
 }
 
 /**
@@ -57,6 +55,7 @@ function copyDeclarations(canisterNames, relativeRootPath) {
  * @param {String} relativeRootPath Relative path to root project
  */
 function bootstrap(relativeRootPath) {
+  console.log("Bootstrapping canisters");
   const dfx = require(path.resolve(relativeRootPath, "dfx.json"));
 
   const canisterNames = Object.keys(dfx.canisters)

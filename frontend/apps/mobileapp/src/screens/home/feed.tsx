@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import z from "zod";
 
-import { useActor } from "@bundly/ic-react";
+import { useActor } from "@bundly/ares-react";
 
 import { Actors } from "../../canisters";
 import { AuthContext } from "../../lib/auth/auth-context";

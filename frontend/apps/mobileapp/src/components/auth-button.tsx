@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "react-native";
 
-import { IdentityProvider } from "@bundly/ic-core-js";
-import { useAuth, useClient, useCurrentProvider, useProviders } from "@bundly/ic-react";
+import { IdentityProvider } from "@bundly/ares-core";
+import { useAuth, useClient, useCurrentProvider, useProviders } from "@bundly/ares-react";
 
 export type AuthButtonProps = {
   login?: {

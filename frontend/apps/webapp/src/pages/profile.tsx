@@ -2,7 +2,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { AuthButton, useActor } from "@bundly/ic-react";
+import { AuthButton, useActor } from "@bundly/ares-react";
 
 import Layout from "@app/components/layout";
 import { Button } from "@app/components/ui/button";

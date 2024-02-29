@@ -1,7 +1,7 @@
 import { ReactNode, createContext, use, useEffect, useState } from "react";
 import z from "zod";
 
-import { useActor, useAuth } from "@bundly/ic-react";
+import { useActor, useAuth } from "@bundly/ares-react";
 
 import { Actors } from "../canisters";
 

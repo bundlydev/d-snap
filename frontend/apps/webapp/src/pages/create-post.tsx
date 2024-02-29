@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { useActor } from "@bundly/ic-react";
+import { useActor } from "@bundly/ares-react";
 
 import Layout from "@app/components/layout";
 import { Avatar, AvatarFallback, AvatarImage } from "@app/components/ui/avatar";

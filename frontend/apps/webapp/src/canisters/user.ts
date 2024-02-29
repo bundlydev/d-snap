@@ -1,6 +1,6 @@
 import { ActorSubclass } from "@dfinity/agent";
 
-import { Canister } from "@bundly/ic-core-js";
+import { Canister } from "@bundly/ares-core";
 
 import { idlFactory } from "@app/declarations/user";
 import { _SERVICE } from "@app/declarations/user/user.did";

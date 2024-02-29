@@ -1,9 +1,9 @@
 import { ExpoRoot } from "expo-router";
 import React from "react";
 
-import { Client } from "@bundly/ic-core-js";
-import { IcpConnectContextProvider } from "@bundly/ic-react";
-import { InternetIdentityReactNative, ReactNativeStorage } from "@bundly/ic-react-native";
+import { Client } from "@bundly/ares-core";
+import { IcpConnectContextProvider } from "@bundly/ares-react";
+import { InternetIdentityReactNative, ReactNativeStorage } from "@bundly/ares-react-native";
 
 import { canisters } from "./canisters";
 import { AuthContextProvider } from "./lib/auth/auth-context";

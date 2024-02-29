@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { useAuth } from "@bundly/ic-react";
+import { useAuth } from "@bundly/ares-react";
 
 import { useProfile } from "./useProfile";
 

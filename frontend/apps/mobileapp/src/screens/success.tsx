@@ -2,8 +2,8 @@ import { Link, router, useLocalSearchParams } from "expo-router";
 import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 
-import { AppLinkParams } from "@bundly/ic-core-js";
-import { useCurrentProvider } from "@bundly/ic-react";
+import { AppLinkParams } from "@bundly/ares-core";
+import { useCurrentProvider } from "@bundly/ares-react";
 
 const SuccessPage = () => {
   const provider = useCurrentProvider();

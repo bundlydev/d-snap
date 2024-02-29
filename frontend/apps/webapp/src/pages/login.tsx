@@ -1,4 +1,4 @@
-import { AuthButton } from "@bundly/ic-react";
+import { AuthButton } from "@bundly/ares-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@app/components/ui/card";
 import { useAuthGuard } from "@app/hooks/useRouterGuard";
