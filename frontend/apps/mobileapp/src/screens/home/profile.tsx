@@ -2,13 +2,13 @@ import classNames from "classnames";
 import React, { useContext, useState } from "react";
 import { Image, Pressable, Text, TextInput, View } from "react-native";
 
-import { useActor } from "@bundly/ares-react";
+import { useCandidActor } from "@bundly/ares-react";
 
 import { Actors } from "../../canisters";
 import { AuthContext } from "../../lib/auth/auth-context";
 
 const ProfilePage = () => {
-  const user = useActor<Actors>("user");
+  const user = useCandidActor<Actors>("user");
   const { profile } = useContext(AuthContext);
   const [username, setUsername] = useState(profile?.username || "");
   const [bio, setBio] = useState(profile?.bio || "");

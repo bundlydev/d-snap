@@ -7,7 +7,7 @@ import { Image, Pressable, Text, TextInput, View } from "react-native";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
-import { useActor } from "@bundly/ares-react";
+import { useCandidActor } from "@bundly/ares-react";
 
 import { Actors } from "../../canisters";
 import { storage } from "../../lib/firebase";
@@ -17,7 +17,7 @@ const CreatePostPage = () => {
   const [imageRemoteUri, setImageRemoteUri] = useState<string | null>(null);
   const [description, setDescription] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
-  const user = useActor<Actors>("user");
+  const user = useCandidActor<Actors>("user");
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import z from "zod";
 
-import { useActor } from "@bundly/ares-react";
+import { useCandidActor } from "@bundly/ares-react";
 
 import { Actors } from "../../canisters";
 import { AuthContext } from "../../lib/auth/auth-context";
@@ -25,7 +25,7 @@ type NestedArray = Array<[string, { id: string; images: { url: string }[]; descr
 
 const FeedPage = () => {
   const { profile } = useContext(AuthContext);
-  const user = useActor<Actors>("user");
+  const user = useCandidActor<Actors>("user");
   const [feed, setFeed] = useState<NestedArray>([]);
 
   useEffect(() => {
